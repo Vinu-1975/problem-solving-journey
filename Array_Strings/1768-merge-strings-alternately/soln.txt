@@ -1,0 +1,25 @@
+class Solution:
+    def mergeAlternately(self, word1: str, word2: str) -> str:
+        # time - O(m + n)
+        # space - O(m + n)
+
+        l1 = l2 = 0
+        if not word1:
+            return word2
+        if not word2:
+            return word1
+
+        res = ""
+        while l1 < len(word1) and l2 < len(word2):
+            res += word1[l1]
+            l1 += 1
+            res += word2[l2]
+            l2 += 1
+        
+        if l1 < len(word1):
+            res += word1[l1:]
+        
+        if l2 < len(word2):
+            res += word2[l2:]
+        
+        return res
