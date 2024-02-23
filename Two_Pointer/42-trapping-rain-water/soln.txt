@@ -1,0 +1,20 @@
+n = len(height)
+maxLeft = [0] * len(height)
+maxRight = [0] * len(height
+curr_max = 0
+for i in range(n):
+    maxLeft[i] = curr_max
+    if height[i] > curr_max:
+        curr_max = height[i]
+
+curr_max = 0
+for i in range(n-1,-1,-1):
+    maxRight[i] = curr_max
+    if height[i] > curr_max:
+        curr_max = height[i
+res = 0
+for i in range(n):
+    curr_trap_size = min(maxLeft[i],maxRight[i]) - height[i]
+    if curr_trap_size > 0:
+        res += curr_trap_siz
+return r
