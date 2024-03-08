@@ -1,0 +1,18 @@
+class Solution:
+    def getMinimumDifference(self, root: Optional[TreeNode]) -> int:
+        prev = None
+        res = float('inf')
+
+        def dfs(root):
+            nonlocal prev, res
+            if root is None:
+                return
+            
+            dfs(root.left)
+            if prev:
+                res = min(res, abs(root.val - prev.val))
+            prev = root
+            dfs(root.right)
+        
+        dfs(root)
+        return res
