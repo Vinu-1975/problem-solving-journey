@@ -1,0 +1,15 @@
+class Solution:
+    def maxFrequencyElements(self, nums: List[int]) -> int:
+        hashie = {}
+        maxim = -1
+        for n in nums:
+            hashie[n] = hashie.get(n,0) + 1
+            maxim = max(maxim,hashie[n])
+        
+        cnt = 0
+        for v in hashie.values():
+            if v == maxim:
+                cnt += 1
+        
+        return cnt * maxim
+        
