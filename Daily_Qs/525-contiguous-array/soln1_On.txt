@@ -1,0 +1,25 @@
+class Solution:
+    def findMaxLength(self, nums: List[int]) -> int:
+        n_zero = 0
+        n_ones = 0
+        hashie = {}
+        res = 0
+        for i,n in enumerate(nums):
+            if n == 0:
+                n_zero += 1
+            else:
+                n_ones += 1
+            diff = n_ones - n_zero
+            if diff == 0:
+                res = 1 + i # or n_ones + n_zero
+            
+            if diff in hashie:
+                res = max(res,i - hashie[diff])
+            else:
+                hashie[diff] = i
+        
+        return res
+
+            
+
+        
