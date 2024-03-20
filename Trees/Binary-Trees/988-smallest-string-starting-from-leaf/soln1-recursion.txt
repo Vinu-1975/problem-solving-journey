@@ -1,0 +1,27 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def smallestFromLeaf(self, root: Optional[TreeNode]) -> str:
+        def dfs(node, path):
+            if not node:
+                return
+    
+            path.append(chr(ord('a') + node.val))  # Convert node value to character
+            if not node.left and not node.right:   # Leaf node
+                nonlocal smallest_string
+                current_string = ''.join(reversed(path))  # Reverse path to get string from leaf to root
+                if not smallest_string or current_string < smallest_string:
+                    smallest_string = current_string
+            else:
+                dfs(node.left, path)
+                dfs(node.right, path)
+            
+            path.pop()  # Backtrack
+    
+        smallest_string = ""
+        dfs(root, [])
+        return smallest_string
