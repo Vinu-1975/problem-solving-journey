@@ -1,0 +1,23 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def pseudoPalindromicPaths (self, root: Optional[TreeNode]) -> int:
+        def dfs(root,freq_arr):
+            if root is None:
+                return
+            freq_arr[root.val] += 1
+            if not root.left and not root.right:
+                res = sum(1 for item in freq_arr if item%2!=0)
+                if res <= 1:
+                    nonlocal cnt
+                    cnt += 1
+            dfs(root.left,freq_arr.copy())
+            dfs(root.right,freq_arr.copy())
+        cnt = 0
+        dfs(root,[0]*10)
+        return cnt
+
