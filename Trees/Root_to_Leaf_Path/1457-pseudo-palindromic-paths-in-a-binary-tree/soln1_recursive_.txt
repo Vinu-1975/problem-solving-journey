@@ -21,3 +21,8 @@ class Solution:
         dfs(root,[0]*10)
         return cnt
 
+"""
+The time complexity of this solution is O(N), where N is the number of nodes in the binary tree. This is because the algorithm performs a depth-first search (DFS) traversal of the entire binary tree, visiting each node once.
+
+The space complexity of the solution is O(H), where H is the height of the binary tree. This space is used to maintain the recursion stack during the depth-first search traversal. In the worst case, if the binary tree is skewed, the height of the tree could be equal to the number of nodes, leading to a space complexity of O(N). However, in a balanced binary tree, the space complexity would be O(log N). Additionally, the space complexity of the path_count list is O(1) because it has a fixed size of 10, representing the digits from 1 to 9. Therefore, the dominant factor in the space complexity is typically the recursion stack.
+"""
