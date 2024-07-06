@@ -1,0 +1,17 @@
+class Solution:
+    def climbStairs(self, n: int) -> int:
+        # memoized
+        # time - O(n)
+        # space - O(n)
+
+        def helper(n,memo):
+            if n == 0 or n == 1:
+                return 1
+            if memo[n] == 0:
+                memo[n] = helper(n-1,memo) + helper(n-2,memo)
+            return memo[n]
+
+        memo = [0] * (n+1)
+        return helper(n,memo)
+
+        
