@@ -1,0 +1,20 @@
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        # time - O(n)
+        # space - O(n)
+
+        memo = {}
+        def dfs(i):
+            if i in memo:
+                return memo[i]
+            if i >= len(nums): # if out of index, no more house to rob, so return 0
+                return 0
+            
+            rob_current = nums[i] + dfs(i+2)
+            skip_current = dfs(i+1)
+
+            memo[i] =  max(rob_current,skip_current)
+            return memo[i]
+
+    
+        return dfs(0)
