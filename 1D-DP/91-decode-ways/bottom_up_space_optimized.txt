@@ -1,0 +1,19 @@
+class Solution:
+    def numDecodings(self, s: str) -> int:
+        # time - O(n)
+        # space - )(1)
+
+        n = len(s)
+        if n == 0:
+            return 0
+        dp1, dp2 = 1, 0
+
+        for i in range(n-1,-1,-1):
+            curr_dp = 0
+            if s[i]!='0':
+                curr_dp = dp1
+                if (i+1<n) and (s[i]=='1' or (s[i]=='2' and s[i+1] in "0123456")):
+                    curr_dp += dp2
+            dp1,dp2 = curr_dp,dp1
+        
+        return dp1
