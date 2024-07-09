@@ -1,0 +1,22 @@
+class Solution:
+    # time - O(n)
+    # space - O(n)
+    def rob(self, nums: List[int]) -> int:
+        n = len(nums)
+
+        if not nums:
+            return 0
+
+        if n == 1:
+            return nums[0]
+
+        def rob_range(nums,start,end):
+            dp = [0] * (end - start + 1 + 1)
+            dp[0] = 0
+            dp[1] = nums[start]
+
+            for i in range(2,end-start+1+1):
+                dp[i] = max(nums[start+i-1]+dp[i-2],dp[i-1])
+            return dp[end-start+1]
+        
+        return max(rob_range(nums,0,n-2),rob_range(nums,1,n-1))

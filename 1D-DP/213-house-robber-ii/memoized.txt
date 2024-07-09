@@ -1,0 +1,27 @@
+class Solution:
+    # time - O(n)
+    # space - O(n)
+    def rob(self, nums: List[int]) -> int:
+        n = len(nums)
+
+        if not nums:
+            return 0
+
+        if n == 1:
+            return nums[0]
+
+        def rob_range(nums,start,end):
+            memo = {}
+            def dfs(i):
+                if i in memo:
+                    return memo[i]
+                if i > end:
+                    return 0
+                rob_curr = nums[i] + dfs(i+2)
+                skip_curr = dfs(i+1)
+                memo[i] =  max(rob_curr,skip_curr)
+                return memo[i]
+
+            return dfs(start)
+        
+        return max(rob_range(nums,0,n-2),rob_range(nums,1,n-1))
