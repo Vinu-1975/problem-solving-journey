@@ -1,0 +1,14 @@
+def isSubset( a1, a2, n, m):
+    freq = {}
+    for num in a1:
+        freq[num] = freq.get(num,0) + 1
+    
+    for num in a2:
+        if num in freq and freq[num] > 0:
+            freq[num] -= 1
+        else:
+            return "No"
+    
+    
+    return "Yes"
+    
