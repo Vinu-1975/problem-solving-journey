@@ -1,0 +1,12 @@
+class Solution:
+    def get_min_max(self, arr):
+        small = float('inf')
+        big = float('-inf')
+        
+        for n in arr:
+            if n > big:
+                big = n
+            if n < small:
+                small = n
+        
+        return [small,big]
