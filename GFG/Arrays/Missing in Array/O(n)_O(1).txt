@@ -1,0 +1,13 @@
+class Solution:
+    
+    # Note that the size of the array is n-1
+    def missingNumber(self, n, arr):
+        
+        # code here
+        required_sum = n * (n+1)//2
+        
+        our_sum = 0
+        for num in arr:
+            our_sum += num
+        
+        return required_sum - our_sum
