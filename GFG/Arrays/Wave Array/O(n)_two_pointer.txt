@@ -1,0 +1,16 @@
+class Solution:
+    def convertToWave(self, n : int, arr : List[int]) -> None:
+        # code here
+        i = 0
+        j = 1
+        while j < n:
+            if j%2 == 1:
+                if arr[j] == max(arr[i],arr[j]):
+                    arr[i],arr[j] = arr[j], arr[i]
+            else:
+                if arr[i] == max(arr[i],arr[j]):
+                    arr[i], arr[j] = arr[j], arr[i]
+            i+=1
+            j+=1
+            
+        
