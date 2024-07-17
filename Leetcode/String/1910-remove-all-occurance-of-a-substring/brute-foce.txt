@@ -1,0 +1,7 @@
+class Solution:
+	# time - if there are k occurrences of part in s, the total time complexity is O(k * n).
+	# space - O(1)
+    def removeOccurrences(self, s: str, part: str) -> str:
+        while part in s:
+            s = s.replace(part, "", 1)  # Remove the first occurrence of part
+        return s
