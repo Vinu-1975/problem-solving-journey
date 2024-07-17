@@ -1,0 +1,12 @@
+class Solution:
+    def getPairsCount(self, arr, sum):
+        # code here
+        store = {}
+        res = 0
+        for i,n in enumerate(arr):
+            diff = sum - n
+            if diff in store:
+                res += store[diff]
+            store[n] = store.get(n,0) + 1
+        
+        return res

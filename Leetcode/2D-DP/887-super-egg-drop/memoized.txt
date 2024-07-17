@@ -1,0 +1,24 @@
+class Solution:
+    # time - O(k * n^2). This is because for each pair (k, n), we iterate through n floors and make calculations that take constant time due to memoization.
+    # space - O(k * n) due to the usage of the memo dictionary, which stores results for all possible pairs (k, n).
+    def superEggDrop(self, k: int, n: int) -> int:
+        memo = {}
+
+        def dp(k,n):
+            if k == 1:
+                return n
+            if n == 0 or n == 1:
+                return n
+            if (k,n) in memo:
+                return memo[(k,n)]
+            res = float('inf')
+            for x in range(1,n+1):
+                broke = dp(k-1,x-1)
+                not_broke = dp(k,n-x)
+                worst_case = 1 + max(broke,not_broke)
+                res = min(res,worst_case)
+            
+            memo[(k,n)] = res
+            return memo[(k,n)]
+        
+        return dp(k,n)

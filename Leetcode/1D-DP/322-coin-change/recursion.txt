@@ -1,0 +1,16 @@
+class Solution:
+    # time = O(S^n) where s amound and n in number of coins
+    # space = O(n)
+    def coinChange(self, coins: List[int], amount: int) -> int:
+        def dp(n):
+            if n == 0:
+                return 0
+            if n < 0:
+                return float('inf')
+            res = float('inf')
+            for coin in coins:
+                res = min(res,1 + dp(n-coin))
+            return res
+        
+        res = dp(amount)
+        return res if res != float('inf') else -1

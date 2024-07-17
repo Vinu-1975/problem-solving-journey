@@ -1,0 +1,21 @@
+class Solution:
+    # time - O(2^n)
+    # space - O(n)
+    def superEggDrop(self, k: int, n: int) -> int:
+        memo = {}
+
+        def dp(k,n):
+            if k == 1:
+                return n
+            if n == 0 or n == 1:
+                return n
+            res = float('inf')
+            for x in range(1,n+1):
+                broke = dp(k-1,x-1)
+                not_broke = dp(k,n-x)
+                worst_case = 1 + max(broke,not_broke)
+                res = min(res,worst_case)
+            
+            return res
+        
+        return dp(k,n)
