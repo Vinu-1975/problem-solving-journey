@@ -1,0 +1,30 @@
+#User function Template for python3
+class Solution:
+    # time - O(n)
+    # spacce - O(n)
+	def search(self,pat, txt):
+	    # code here
+	    pat_dict = {}
+	    
+	    n = len(pat)
+	    for char in pat:
+	        pat_dict[char] = pat_dict.get(char,0) + 1
+	    
+	    window_dict = {}
+	    
+	    i = 0
+	    j = 0
+	    res = 0
+	    while j < len(txt):
+	        window_dict[txt[j]] = window_dict.get(txt[j],0) + 1
+	        if (j-i+1) > n:
+	            window_dict[txt[i]] -= 1
+	            if window_dict[txt[i]] <= 0:
+	                del window_dict[txt[i]]
+	            i+=1
+	        
+	        if window_dict == pat_dict:
+	            res += 1
+	        j+=1
+	   
+	    return res
