@@ -1,0 +1,31 @@
+from collections import deque
+
+class Solution:
+    # time - O(N^2)
+    # space - O(N^2)
+    def minStepToReachTarget(self, KnightPos, TargetPos, N):
+        
+        def valid_pos(x, y, N):
+            return 1 <= x <= N and 1 <= y <= N
+        
+        def calc_min_steps(KnightPos, TargetPos, N):
+            moves = [(1, 2), (-1, 2), (1, -2), (-1, -2), (-2, 1), (2, 1), (-2, -1), (2, -1)]
+            queue = deque([(KnightPos[0], KnightPos[1], 0)])
+            visited = set()
+            visited.add((KnightPos[0], KnightPos[1]))
+            
+            while queue:
+                x, y, steps = queue.popleft()
+                
+                if (x, y) == (TargetPos[0],TargetPos[1]):
+                    return steps
+                
+                for dx, dy in moves:
+                    nx, ny = x + dx, y + dy
+                    if valid_pos(nx, ny, N) and (nx, ny) not in visited:
+                        visited.add((nx, ny))
+                        queue.append((nx, ny, steps + 1))
+            
+            return -1
+        
+        return calc_min_steps(KnightPos, TargetPos, N)
