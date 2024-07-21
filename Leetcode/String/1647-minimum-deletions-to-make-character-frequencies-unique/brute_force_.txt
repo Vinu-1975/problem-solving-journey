@@ -1,0 +1,26 @@
+class Solution:
+	# time - O(2^n)
+    def minDeletions(self, s: str) -> int:
+        from itertools import combinations
+        from collections import Counter
+
+        def is_good_string(s):
+            freq = Counter(s)
+            freq_values = list(freq.values())
+            return len(freq_values) == len(set(freq_values))
+
+        if is_good_string(s):
+            return 0
+    
+        min_deletions = len(s)
+
+        # Generate all possible deletions
+        for k in range(1, len(s) + 1):
+            for indices in combinations(range(len(s)), k):
+                # Create a new string by deleting characters at these indices
+                new_s = ''.join(s[i] for i in range(len(s)) if i not in indices)
+                if is_good_string(new_s):
+                    min_deletions = min(min_deletions, k)
+                    break
+
+        return min_deletions

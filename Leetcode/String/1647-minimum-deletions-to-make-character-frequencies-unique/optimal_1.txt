@@ -1,0 +1,18 @@
+class Solution:
+    def minDeletions(self, s: str) -> int:
+        # time - O(n+klogk) where k is the number of unique characters (at most 26 for lowercase English letters).
+        # space - O(k)
+        from collections import Counter
+        store = Counter(s)
+        freqs = sorted(store.values(),reverse=True)
+
+        seen = set()
+        res = 0
+
+        for f in freqs:
+            while f in seen and f > 0:
+                f -= 1
+                res += 1
+            seen.add(f)
+
+        return res

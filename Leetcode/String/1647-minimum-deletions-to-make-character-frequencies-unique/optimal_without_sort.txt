@@ -1,0 +1,18 @@
+class Solution:
+        # time - O(n)
+        # space - O(k)
+    def minDeletions(self, s: str) -> int:
+
+        store = Counter(s)
+        freqs = list(store.values())
+
+        seen = set()
+        res = 0
+
+        for f in freqs:
+            while f in seen and f > 0:
+                f -= 1
+                res += 1
+            seen.add(f)
+
+        return res

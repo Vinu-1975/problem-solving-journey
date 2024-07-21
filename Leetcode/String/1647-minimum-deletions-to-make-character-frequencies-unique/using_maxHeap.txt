@@ -1,0 +1,18 @@
+import heapq
+from collections import Counter
+	# time - O(n + klogk)
+
+def minDeletions(s: str) -> int:
+    freq = Counter(s)
+    max_heap = [-f for f in freq.values()]
+    heapq.heapify(max_heap)
+    
+    deletions = 0
+    while len(max_heap) > 1:
+        top = -heapq.heappop(max_heap)
+        if top == -max_heap[0]:
+            if top > 1:
+                heapq.heappush(max_heap, -(top - 1))
+            deletions += 1
+    
+    return deletions
