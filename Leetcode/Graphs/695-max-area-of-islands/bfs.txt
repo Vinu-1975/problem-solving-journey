@@ -1,0 +1,28 @@
+class Solution:
+    from collections import deque
+    def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
+        m, n = len(grid), len(grid[0])
+
+        def bfs(r,c):
+            queue = deque([(r,c)])
+            visited.add((r,c))
+            area = 1
+            while queue:
+                cr, cc = queue.popleft()
+                moves = [(0,1),(1,0),(-1,0),(0,-1)]
+                # area += 1
+                for dr,dc in moves:
+                    nr, nc = cr + dr, cc + dc
+                    if 0<=nr<m and 0<=nc<n and grid[nr][nc] == 1 and (nr,nc) not in visited:
+                        visited.add((nr,nc))
+                        queue.append((nr,nc))
+                        area += 1
+            return area
+
+        res = 0
+        visited = set()
+        for r in range(m):
+            for c in range(n):
+                if grid[r][c] == 1 and (r,c) not in visited:
+                    res = max(res,bfs(r,c))
+        return res
