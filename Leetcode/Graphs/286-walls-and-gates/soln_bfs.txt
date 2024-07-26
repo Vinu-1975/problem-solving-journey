@@ -1,0 +1,26 @@
+from collections import deque
+class Solution:
+	# time - O(mn)
+	# space - O(mn) (for queue)
+    def islandsAndTreasure(self, grid: List[List[int]]) -> None:
+        m = len(grid)
+        n = len(grid[0])
+
+        queue = deque()
+
+        for r in range(m):
+            for c in range(n):
+                if grid[r][c] == 0:
+                    queue.append((r,c))
+        moves = [(0,1),(1,0),(-1,0),(0,-1)]
+        while queue:
+            cr, cc = queue.popleft()
+
+            for dr, dc in moves:
+                nr, nc = cr + dr, cc + dc
+                if 0<=nr<m and 0<=nc<n and grid[nr][nc] == 2147483647:
+                    grid[nr][nc] = grid[cr][cc] + 1
+                    queue.append((nr,nc))
+        
+        return grid
+
