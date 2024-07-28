@@ -1,0 +1,18 @@
+class Solution:
+    # time - O(n)
+    # space - O(n)
+    # refer  neetcode video for beautiful explanation
+    def subarraySum(self, nums: List[int], k: int) -> int:
+        store = {0:1}
+        res = 0
+        cum_sum = 0
+        for n in nums:
+            cum_sum += n
+            if (cum_sum-k) in store:
+                res += store[cum_sum-k]
+            if cum_sum in store:
+                store[cum_sum] += 1
+            else:
+                store[cum_sum] = 1
+        
+        return res
