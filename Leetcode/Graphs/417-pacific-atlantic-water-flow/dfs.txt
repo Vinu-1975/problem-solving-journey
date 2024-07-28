@@ -1,0 +1,31 @@
+class Solution:
+	# time - O(mn)
+	# space - O(mn)
+    def pacificAtlantic(self, heights: List[List[int]]) -> List[List[int]]:
+        
+        def dfs(r,c,visited,prev_height):
+            if (not (0 <= r < m and 0 <= c < n)) or visited[r][c] or heights[r][c]<prev_height:
+                return
+            visited[r][c] = True
+            for dr, dc in [(0,1),(1,0),(-1,0),(0,-1)]:
+                nr, nc = r + dr, c + dc
+                dfs(nr,nc,visited,heights[r][c])
+
+        if not heights:
+            return []
+
+        m, n = len(heights), len(heights[0])
+        visited_pacific = [[False] * n for _ in range(m)]
+        visited_atlantic = [[False] * n for _ in range(m)]
+
+        for r in range(m):
+            dfs(r,0,visited_pacific,heights[r][0])
+            dfs(r,n-1,visited_atlantic,heights[r][n-1])
+        
+        for c in range(n):
+            dfs(0,c,visited_pacific,heights[0][c])
+            dfs(m-1,c,visited_atlantic,heights[m-1][c])
+        
+        return [[r,c] for r in range(m) for c in range(n) if visited_pacific[r][c] and visited_atlantic[r][c]]
+
+        
