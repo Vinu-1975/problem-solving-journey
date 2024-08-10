@@ -1,0 +1,91 @@
+// Online Java Compiler
+// Use this editor to write, compile and run your Java code online
+import java.util.Arrays;
+
+class HelloWorld {
+    // public static void mergeSort(long arr[]){
+    //     if(arr.length>1){
+    //         int mid = arr.length/2;
+    //         long[] left = Arrays.copyOfRange(arr, 0, mid);
+    //         long[] right = Arrays.copyOfRange(arr,mid,arr.length);
+    //         mergeSort(left);
+    //         mergeSort(right);
+
+    //         int i = 0;
+    //         int j = 0;
+    //         int k = 0;
+
+    //         while (i<left.length && j<right.length){
+    //             if(left[i]>right[j]){
+    //                 arr[k] = right[j];
+    //                 j++;
+    //             }else{
+    //                 arr[k] = left[i];
+    //                 i++;
+    //             }
+    //             k++;
+    //         }
+    //         while (i<left.length){
+    //             arr[k] = left[i];
+    //             i++;
+    //             k++;
+    //         }
+    //         while(j<left.length){
+    //             arr[k] = right[j];
+    //             j++;
+    //             k++;
+    //         }
+    //     }
+    // }
+    
+    public static long mergeSort(long[] arr){
+        if(arr.length<=1)return 0;
+        int mid = arr.length / 2;
+        long[] left = Arrays.copyOfRange(arr,0,mid);
+        long[] right = Arrays.copyOfRange(arr,mid,arr.length);
+        
+        long inversions = 0;
+        
+        inversions += mergeSort(left);
+        inversions += mergeSort(right);
+        
+        inversions += mergeAndCount(arr,left,right);
+        
+        return inversions;
+    }
+    
+    public static long mergeAndCount(long[] arr,long[] left, long[] right){
+        int i=0,j=0,k=0;
+        long inversions = 0;
+        
+        while(i<left.length && j<right.length){
+            if(left[i] > right[j]){
+                arr[k] = right[j];
+                inversions += (left.length-i);
+                j++;
+            }
+            else{
+                arr[k] = left[i];
+                i++;
+            }
+            k++;
+        }
+        
+        while(i<left.length){
+            arr[k++] = left[i++];
+        }
+        while(j<right.length){
+            arr[k++] = right[j++];
+        }
+        
+        return inversions;
+        
+    }
+    public static void main(String[] args) {
+        long[] arr = {1,4,3,5,6,7,8,7,4,3,42,3};
+        System.out.println(Arrays.toString(arr));
+        System.out.println(mergeSort(arr));
+        System.out.println(Arrays.toString(arr));
+        System.out.println("Try programiz.pro");
+    }
+}
