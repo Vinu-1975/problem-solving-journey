@@ -15,12 +15,11 @@ class Solution:
 
         dp = [-1] * (n)
         dp[0] = nums[0]
-        dp[1] = max(nums[0],nums[1])
-        for i in range(2,n):
+        for i in range(1,n):
             skip = dp[i-1]
-            rob = 0
-            if i-2 >= 0:
-                rob = dp[i-2] + nums[i]
+            rob = nums[i]
+            if i>1:
+                rob += dp[i-2]
             dp[i] = max(skip,rob)
         
         return dp[n-1]
