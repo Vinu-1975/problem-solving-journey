@@ -1,8 +1,8 @@
 
 """
 
-Time complexity : O(n^2) (2 is the choice to pick or not pick)
-space complexity : O(n^2) 
+Time complexity : O(2^n) * n (2 is the choice to pick or not pick)
+space complexity : O(2^n) * n 
 """
 
 class Solution:
