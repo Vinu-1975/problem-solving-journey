@@ -1,4 +1,13 @@
 #User function Template for python3
+
+# for normal recursion:
+    # time comeplexity = O(k^n)
+    # space = O(n)
+
+# for memoization:
+    # time comeplexity = O(k*n)
+    # space = O(n)
+
 class Solution:
     def minimizeCost(self, arr, k):
         # code here

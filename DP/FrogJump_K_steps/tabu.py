@@ -1,9 +1,10 @@
-#{ 
- # Driver Code Starts
-#Initial Template for Python 3
+#Template for Python 3
 
-# } Driver Code Ends
-#User function Template for python3
+
+# for tabulation:
+    # time comeplexity = O(k*n)
+    # space = O(n)
+
 class Solution:
     def minimizeCost(self, arr, k):
         # code here
