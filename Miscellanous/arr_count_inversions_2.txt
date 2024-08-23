@@ -1,0 +1,39 @@
+from typing import *
+
+def mergeSort(a):
+    if len(a)<=1:
+        return a,0
+
+    mid = len(a) // 2
+    left_a,left_inv = mergeSort(a[:mid])
+    right_a,right_inv = mergeSort(a[mid:])
+
+    merged,cross_inv = merge_cnt(left_a,right_a)
+    total_inv = left_inv+right_inv+cross_inv
+    
+    return merged,total_inv
+
+def merge_cnt(left_a,right_a):
+    i = j = 0
+    inv = 0
+    merged = []
+
+    while i<len(left_a) and j<len(right_a):
+        if(left_a[i]<=right_a[j]):
+            merged.append(left_a[i])
+            i+=1
+        else:
+            merged.append(right_a[j])
+            inv += len(left_a) - i
+            j+=1
+
+    merged.extend(left_a[i:])
+    merged.extend(right_a[j:])
+    return merged,inv
+
+
+def numberOfInversions(a : List[int], n : int) -> int:
+    # Write your code here.
+    arr,res = mergeSort(a)
+    return res
+    
